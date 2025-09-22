@@ -282,25 +282,22 @@
 /* SEARCH PAGE STYLING */
 .search-container {
   background: var(--main-bg);
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .search-bar {
   background: var(--secondary-bg);
   border: 2px solid var(--border-color);
-  border-radius: 2rem;
-  padding: 1rem 2rem;
-  font-size: 1.125rem;
+  border-radius: 1rem;
   color: var(--text-primary);
-  width: 100%;
-  max-width: 600px;
   transition: all 0.3s ease;
 }
 
 .search-bar:focus {
   outline: none;
   border-color: var(--accent-color);
-  box-shadow: 0 0 0 4px rgba(148, 137, 121, 0.2);
+  box-shadow: 0 0 0 3px rgba(148, 137, 121, 0.2);
 }
 
 .trending-tag {

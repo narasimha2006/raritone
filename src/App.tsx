@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ToastProvider } from "./components/ToastContainer";
 import Index from "./pages/Index";
+import { useLocation } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import Catalog from "./pages/Catalog";
 import Cart from "./pages/Cart";

@@ -85,7 +85,7 @@ const Catalog = () => {
     {
       id: '5',
       name: 'Raritone David Bowie Hooodie',
-      description: 'Celebrate the legacy of a music legend with the Raritone David Bowie Hoodie, designed exclusively for the discerning fan at Theraritone. Crafted from premium materials, this hoodie showcases Bowie’s iconic style while ensuring unparalleled comfort and durability. ',
+      description: 'Celebrate the legacy of a music legend with the Raritone David Bowie Hoodie, designed exclusively for the discerning fan at Theraritone. Crafted from premium materials, this hoodie showcases Bowie's iconic style while ensuring unparalleled comfort and durability. ',
       price: 7999,
       imageURL: 'https://static.wixstatic.com/media/3903b5_9e76791087d8471da8745d15ce88f383~mv2.jpg/v1/fill/w_346,h_490,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/3903b5_9e76791087d8471da8745d15ce88f383~mv2.jpg',
       backImageURL: 'https://static.wixstatic.com/media/3903b5_d1930f8ee63542d0a3d165512779be61~mv2.jpg/v1/fill/w_348,h_490,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/3903b5_d1930f8ee63542d0a3d165512779be61~mv2.jpg',
@@ -398,7 +398,7 @@ const Catalog = () => {
                       e.stopPropagation();
                       addToWishlist(product.id!);
                     }}
-                    className={`p-2 rounded-full transition-all duration-200 ${
+                    className={`w-10 h-10 rounded-full transition-all duration-200 flex items-center justify-center ${
                       wishlist.includes(product.id!)
                         ? 'bg-red-500 text-white'
                         : 'bg-black/50 text-white hover:bg-black/70'
@@ -416,7 +416,7 @@ const Catalog = () => {
                     whileTap={{ scale: 0.9 }}
                     onClick={(e) => quickAddToCart(e, product)}
                     disabled={product.stock === 0}
-                    className="p-2 bg-[rgb(236,223,204)] text-[rgb(24,28,20)] rounded-full hover:bg-[rgb(220,210,190)] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-10 h-10 bg-[rgb(236,223,204)] text-[rgb(24,28,20)] rounded-full hover:bg-[rgb(220,210,190)] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                   >
                     <ShoppingBag size={16} />
                   </motion.button>
