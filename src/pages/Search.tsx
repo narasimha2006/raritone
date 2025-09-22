@@ -188,32 +188,44 @@ const SearchPage = () => {
   };
 
   return (
-    <div className="search-container">
-      <div className="min-h-screen px-4 py-8">
-        {/* Header with Logo */}
-        <div className="text-center mb-12">
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: 'var(--main-bg)' }}>
+      {/* Fixed Header Section - No Scroll */}
+      <div className="flex-shrink-0 px-4 py-8">
+        {/* Back to Home Button */}
+        <div className="absolute top-6 left-6 z-10">
+          <button
+            onClick={() => navigate('/')}
+            className="p-3 bg-[var(--secondary-bg)] border-2 border-[var(--border-color)] rounded-full text-[var(--text-primary)] hover:text-[var(--accent-color)] hover:bg-[var(--accent-color)] hover:text-[var(--main-bg)] transition-all duration-300"
+          >
+            <X size={24} />
+          </button>
+        </div>
+
+        {/* Centered Search Interface */}
+        <div className="max-w-4xl mx-auto text-center pt-16">
+          {/* Larger Logo */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-8"
+            className="mb-12"
           >
             <img
               src="/IMG-20250305-WA0003-removebg-preview.png"
               alt="RARITONE"
-              className="mx-auto h-16 sm:h-20 w-auto cursor-pointer luxury-float"
+              className="mx-auto h-24 sm:h-32 w-auto cursor-pointer luxury-float"
               onClick={() => navigate('/')}
               style={{ filter: 'brightness(1.2) drop-shadow(0 0 30px rgba(148, 137, 121, 0.5))' }}
             />
           </motion.div>
 
-          {/* Enhanced Search Bar */}
+          {/* Enhanced Search Bar with Fixed Icon */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="relative max-w-2xl mx-auto mb-8"
+            className="relative max-w-3xl mx-auto mb-12"
           >
             <div className="relative">
-              <div className="absolute left-6 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
+              <div className="absolute left-6 top-1/2 transform -translate-y-1/2 pointer-events-none">
                 <Search className="text-[var(--accent-color)]" size={24} />
               </div>
               <input
@@ -221,14 +233,14 @@ const SearchPage = () => {
                 placeholder="Search for Products, Categories..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="search-bar pl-16 pr-6"
+                className="w-full pl-16 pr-16 py-6 text-xl bg-[var(--secondary-bg)] border-2 border-[var(--border-color)] rounded-2xl color-[var(--text-primary)] placeholder-[var(--accent-color)] focus:outline-none focus:border-[var(--accent-color)] focus:ring-4 focus:ring-[var(--accent-color)]/20 transition-all duration-300"
                 autoFocus
               />
               {searchQuery && (
-                <div className="absolute right-6 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
+                <div className="absolute right-6 top-1/2 transform -translate-y-1/2">
                   <button
                     onClick={() => setSearchQuery('')}
-                    className="text-[var(--accent-color)] hover:text-[var(--text-primary)] transition-colors"
+                    className="text-[var(--accent-color)] hover:text-[var(--text-primary)] transition-colors p-1"
                   >
                     <X size={20} />
                   </button>
@@ -241,17 +253,15 @@ const SearchPage = () => {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="absolute top-full left-0 right-0 mt-2 bg-[var(--secondary-bg)] border-2 border-[var(--border-color)] rounded-xl shadow-lg z-10"
+                className="absolute top-full left-0 right-0 mt-4 bg-[var(--secondary-bg)] border-2 border-[var(--border-color)] rounded-xl shadow-lg z-10"
               >
                 {suggestions.map((suggestion, index) => (
                   <button
                     key={index}
                     onClick={() => handleSuggestionClick(suggestion)}
-                    className="w-full text-left px-6 py-3 text-[var(--text-primary)] hover:bg-[var(--accent-color)] hover:text-[var(--main-bg)] transition-colors first:rounded-t-xl last:rounded-b-xl"
+                    className="w-full text-left px-6 py-4 text-[var(--text-primary)] hover:bg-[var(--accent-color)] hover:text-[var(--main-bg)] transition-colors first:rounded-t-xl last:rounded-b-xl flex items-center"
                   >
-                    <div className="flex items-center justify-center mr-3">
-                      <Search size={16} />
-                    </div>
+                    <Search size={16} className="mr-3 flex-shrink-0" />
                     {suggestion}
                   </button>
                 ))}
@@ -266,15 +276,11 @@ const SearchPage = () => {
               animate={{ opacity: 1, y: 0 }}
               className="mb-12"
             >
-              <h3 className="text-xl font-bold text-[var(--text-primary)] mb-6 flex items-center justify-center space-x-3">
-                <div className="flex items-center justify-center">
-                  <TrendingUp size={24} />
-                </div>
-                <span>
-                Trending Searches
-                </span>
+              <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-8 flex items-center justify-center space-x-3">
+                <TrendingUp size={28} />
+                <span>Trending Searches</span>
               </h3>
-              <div className="flex flex-wrap justify-center gap-3">
+              <div className="flex flex-wrap justify-center gap-4">
                 {trendingSearches.map((search, index) => (
                   <motion.button
                     key={index}
@@ -282,7 +288,7 @@ const SearchPage = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.1 }}
                     onClick={() => handleTrendingClick(search)}
-                    className="trending-tag"
+                    className="px-6 py-3 bg-[var(--secondary-bg)] border border-[var(--border-color)] text-[var(--text-primary)] rounded-full hover:bg-[var(--accent-color)] hover:text-[var(--main-bg)] transition-all duration-300 hover:scale-105"
                   >
                     {search}
                   </motion.button>
@@ -291,10 +297,13 @@ const SearchPage = () => {
             </motion.div>
           )}
         </div>
+      </div>
 
+      {/* Scrollable Content Section */}
+      <div className="flex-1 overflow-y-auto">
         {/* Loading */}
         {isLoading && (
-          <div className="flex justify-center py-12">
+          <div className="flex justify-center py-16">
             <div className="loading-spinner"></div>
           </div>
         )}
@@ -304,21 +313,20 @@ const SearchPage = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="max-w-7xl mx-auto"
+            className="max-w-7xl mx-auto px-4 py-8"
           >
-            <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-8 text-center">
+            <h3 className="text-3xl font-bold text-[var(--text-primary)] mb-12 text-center">
               Search Results ({searchResults.length})
             </h3>
             
-            {/* Responsive Grid: 4-5 on desktop, 2 on mobile */}
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
               {searchResults.map((product, index) => (
                 <motion.div
                   key={product.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="product-card group"
+                  className="product-card group rounded-xl overflow-hidden"
                 >
                   <div className="aspect-[3/4] overflow-hidden relative">
                     <img
@@ -336,7 +344,7 @@ const SearchPage = () => {
                           e.stopPropagation();
                           addToWishlist(product.id);
                         }}
-                        className={`p-2 rounded-full transition-all duration-200 ${
+                        className={`w-10 h-10 rounded-full transition-all duration-200 flex items-center justify-center ${
                           wishlist.includes(product.id)
                             ? 'bg-red-500 text-white'
                             : 'bg-black/60 text-white hover:bg-black/80'
@@ -355,7 +363,7 @@ const SearchPage = () => {
                           e.stopPropagation();
                           quickAddToCart(product);
                         }}
-                        className="p-2 bg-[var(--accent-color)] text-[var(--main-bg)] rounded-full hover:bg-[#A69688] transition-all duration-200"
+                        className="w-10 h-10 bg-[var(--accent-color)] text-[var(--main-bg)] rounded-full hover:bg-[#A69688] transition-all duration-200 flex items-center justify-center"
                       >
                         <ShoppingBag size={16} />
                       </motion.button>
@@ -384,7 +392,7 @@ const SearchPage = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center py-16"
+            className="text-center py-20 px-4"
           >
             <Search size={64} className="mx-auto text-[var(--accent-color)] mb-6" />
             <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-4">
@@ -407,20 +415,20 @@ const SearchPage = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="max-w-7xl mx-auto"
+            className="max-w-7xl mx-auto px-4 py-8"
           >
-            <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-8 text-center">
+            <h3 className="text-3xl font-bold text-[var(--text-primary)] mb-12 text-center">
               Featured Products
             </h3>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
               {mockProducts.map((product, index) => (
                 <motion.div
                   key={product.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="product-card group"
+                  className="product-card group rounded-xl overflow-hidden"
                   onClick={() => navigate('/catalog')}
                 >
                   <div className="aspect-[3/4] overflow-hidden relative">
@@ -439,7 +447,7 @@ const SearchPage = () => {
                           e.stopPropagation();
                           addToWishlist(product.id);
                         }}
-                        className={`p-2 rounded-full transition-all duration-200 ${
+                        className={`w-10 h-10 rounded-full transition-all duration-200 flex items-center justify-center ${
                           wishlist.includes(product.id)
                             ? 'bg-red-500 text-white'
                             : 'bg-black/60 text-white hover:bg-black/80'
@@ -458,7 +466,7 @@ const SearchPage = () => {
                           e.stopPropagation();
                           quickAddToCart(product);
                         }}
-                        className="p-2 bg-[var(--accent-color)] text-[var(--main-bg)] rounded-full hover:bg-[#A69688] transition-all duration-200"
+                        className="w-10 h-10 bg-[var(--accent-color)] text-[var(--main-bg)] rounded-full hover:bg-[#A69688] transition-all duration-200 flex items-center justify-center"
                       >
                         <ShoppingBag size={16} />
                       </motion.button>
@@ -481,16 +489,6 @@ const SearchPage = () => {
             </div>
           </motion.div>
         )}
-
-        {/* Back to Home */}
-        <div className="fixed top-6 left-6 z-10">
-          <button
-            onClick={() => navigate('/')}
-            className="p-3 bg-[var(--secondary-bg)] border-2 border-[var(--border-color)] rounded-full text-[var(--text-primary)] hover:text-[var(--accent-color)] hover:bg-[var(--accent-color)] hover:text-[var(--main-bg)] transition-all duration-300"
-          >
-            <X size={24} />
-          </button>
-        </div>
       </div>
     </div>
   );
