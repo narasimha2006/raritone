@@ -85,7 +85,7 @@ const Catalog = () => {
     {
       id: '5',
       name: 'Raritone David Bowie Hooodie',
-      description: 'Celebrate the legacy of a music legend with the Raritone David Bowie Hoodie, designed exclusively for the discerning fan at Theraritone. Crafted from premium materials, this hoodie showcases Bowie's iconic style while ensuring unparalleled comfort and durability. ',
+      description: "Celebrate the legacy of a music legend with the Raritone David Bowie Hoodie, designed exclusively for the discerning fan at Theraritone. Crafted from premium materials, this hoodie showcases Bowie's iconic style while ensuring unparalleled comfort and durability.",
       price: 7999,
       imageURL: 'https://static.wixstatic.com/media/3903b5_9e76791087d8471da8745d15ce88f383~mv2.jpg/v1/fill/w_346,h_490,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/3903b5_9e76791087d8471da8745d15ce88f383~mv2.jpg',
       backImageURL: 'https://static.wixstatic.com/media/3903b5_d1930f8ee63542d0a3d165512779be61~mv2.jpg/v1/fill/w_348,h_490,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/3903b5_d1930f8ee63542d0a3d165512779be61~mv2.jpg',
