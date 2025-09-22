@@ -9,6 +9,7 @@ import ChatWidget from '@/components/ChatWidget';
 import ProductModal from '@/components/ProductModal';
 import AddToCartToast from '@/components/AddToCartToast';
 import ButterflyScene from '@/components/ButterflyScene';
+import LatestArrivalsCarousel from '@/components/LatestArrivalsCarousel';
 import { useToast } from '@/components/ToastContainer';
 import { useAuth } from '@/contexts/AuthContext';
 import { addToCart } from '@/lib/user';
@@ -382,39 +383,8 @@ const Index = () => {
             </p>
           </div>
 
-          {/* Edge-to-Edge Product Showcase */}
-          <div className="w-full overflow-hidden">
-            <div className="flex animate-slide-right space-x-0">
-              {[
-                { id: 1, name: "Bold Vibe Oversize T-Shirt", price: 696, image: "Raritone Collection/Bold vibe Oversize Tshirt.jpg" },
-                { id: 2, name: "Raritone Hoodie", price: 1043, image: "Raritone Collection/Hoddie1(F).jpg" },
-                { id: 3, name: "Kiss Me Again Oversize T-Shirt", price: 399, image: "Raritone Collection/Kiss me again.jpeg" },
-                { id: 4, name: "Minimal Look Oversize T-Shirt", price: 599, image: "Raritone Collection/Minimal look Oversize Tshirt.jpg" },
-                { id: 1, name: "Bold Vibe Oversize T-Shirt", price: 696, image: "Raritone Collection/Bold vibe Oversize Tshirt.jpg" },
-                { id: 2, name: "Raritone Hoodie", price: 1043, image: "Raritone Collection/Hoddie1(F).jpg" },
-                { id: 3, name: "Kiss Me Again Oversize T-Shirt", price: 399, image: "Raritone Collection/Kiss me again.jpeg" },
-                { id: 4, name: "Minimal Look Oversize T-Shirt", price: 599, image: "Raritone Collection/Minimal look Oversize Tshirt.jpg" }
-              ].map((product, index) => (
-                <div
-                  key={`latest-${product.id}-${index}`}
-                  className="flex-shrink-0 w-80 cursor-pointer group"
-                  onClick={() => navigate('/catalog')}
-                >
-                  <div className="aspect-[3/4] overflow-hidden">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="p-4 text-center">
-                    <h3 className="text-lg font-bold text-[var(--text-primary)] mb-1">{product.name}</h3>
-                    <p className="text-xl font-bold text-[var(--text-primary)]">₹{product.price}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* Full Width Product Showcase with Navigation */}
+          <LatestArrivalsCarousel />
         </div>
       </section>
 
