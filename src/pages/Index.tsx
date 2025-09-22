@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Camera, ShoppingBag, Shield, Zap, Clock, Star, TrendingUp, Mail, Phone, MapPin, Heart, ArrowRight } from 'lucide-react';
 import Navbar from '@/components/Navbar';
@@ -22,9 +22,26 @@ const Index = () => {
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [showCartToast, setShowCartToast] = useState(false);
   const [cartToastItem, setCartToastItem] = useState(null);
+  const [scrollY, setScrollY] = useState(0);
+  const [showHeading, setShowHeading] = useState(false);
+  const heroLogoRef = useRef<HTMLImageElement>(null);
   const navigate = useNavigate();
   const { showToast } = useToast();
   const { user, refreshCart, addToLocalCart } = useAuth();
+
+  // Scroll handler for animations
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrollY(currentScrollY);
+      
+      // Show heading after scrolling down 200px
+      setShowHeading(currentScrollY > 200);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Detect mobile device
   useEffect(() => {
@@ -214,28 +231,54 @@ const Index = () => {
         {/* Hero Content */}
         <div className="relative z-10 text-center max-w-5xl mx-auto px-4 sm:px-8" style={{ zIndex: 3 }}>
           <div className="p-8 sm:p-12 lg:p-16">
-            <div className="mb-8">
+            <div className="mb-8" ref={heroLogoRef}>
               <img
                 src="/IMG-20250305-WA0003-removebg-preview.png"
                 alt="RARITONE"
-                className="mx-auto w-full max-w-xs sm:max-w-2xl h-auto luxury-float"
+                className="mx-auto w-full max-w-xs sm:max-w-2xl h-auto luxury-float transition-all duration-700 ease-out"
                 style={{ 
                   filter: 'drop-shadow(0 0 50px rgba(148, 137, 121, 0.8)) brightness(1.3)',
+                  transform: `scale(${Math.max(0.3, 1 - scrollY * 0.001)}) translateY(${scrollY * 0.5}px)`,
+                  opacity: Math.max(0.2, 1 - scrollY * 0.002)
                 }}
               />
             </div>
 
-            <h1 className="hero-title mb-6">
+            <motion.h1 
+              className="hero-title mb-6"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ 
+                opacity: showHeading ? 1 : 0,
+                y: showHeading ? 0 : 30
+              }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
               Fashion Meets Technology
-            </h1>
+            </motion.h1>
 
-            <p className="hero-subtitle font-light mb-16 opacity-90 max-w-2xl mx-auto">
+            <motion.p 
+              className="hero-subtitle font-light mb-16 opacity-90 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ 
+                opacity: showHeading ? 1 : 0,
+                y: showHeading ? 0 : 30
+              }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            >
               Experience perfect-fit fashion with our revolutionary AI body scanning technology. 
               Discover your style with precision and confidence.
-            </p>
+            </motion.p>
 
             {/* Enhanced CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
+            <motion.div 
+              className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ 
+                opacity: showHeading ? 1 : 0,
+                y: showHeading ? 0 : 30
+              }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+            >
               <button
                 className="btn-primary font-bold flex items-center space-x-3 rounded-full justify-center w-full max-w-xs sm:min-w-[260px] px-8 py-4 text-base luxury-glow"
                 onClick={() => navigate('/scan')}
@@ -251,14 +294,22 @@ const Index = () => {
                 <ShoppingBag size={24} />
                 <span>Browse Collection</span>
               </button>
-            </div>
+            </motion.div>
 
             {/* Enhanced Privacy Notice */}
-            <div className="max-w-lg mx-auto">
+            <motion.div 
+              className="max-w-lg mx-auto"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ 
+                opacity: showHeading ? 1 : 0,
+                y: showHeading ? 0 : 30
+              }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
+            >
               <p className="text-sm px-6 py-3 rounded-xl border border-[var(--border-color)] bg-[var(--secondary-bg)]/50 backdrop-blur-md text-[var(--accent-color)]">
                 🔒 Your camera data is processed locally and never stored or shared
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

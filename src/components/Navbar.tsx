@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, memo } from 'react';
+import { motion } from 'framer-motion';
 import { Search, ShoppingBag, User, Menu, X, ArrowLeft, Settings } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
@@ -173,11 +174,17 @@ const Navbar: React.FC<NavbarProps> = memo(({ onSearchOpen, onCartOpen, pageTitl
                   </h1>
                 </div>
               ) : (
-                <img
+                <motion.img
                   src="/IMG-20250305-WA0003-removebg-preview.png"
                   alt="RARITONE"
-                  className="cursor-pointer transition-all duration-300 luxury-float"
+                  className="cursor-pointer transition-all duration-700 ease-out"
                   onClick={() => navigate('/')}
+                  initial={false}
+                  animate={{
+                    scale: isVisible ? 1 : 0.8,
+                    opacity: isVisible ? 1 : 0.9
+                  }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
                   style={{
                     height: isMobile ? '56px' : '72px',
                     width: 'auto',
